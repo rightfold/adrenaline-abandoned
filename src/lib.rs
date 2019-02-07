@@ -2,6 +2,7 @@
 extern crate serde_derive;
 
 extern crate ed25519_dalek;
+extern crate rand;
 extern crate serde_cbor;
 extern crate uuid;
 
