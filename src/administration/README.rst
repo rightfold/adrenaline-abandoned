@@ -17,7 +17,8 @@ Requests
 --------
 
 The encoding of requests is unstable. Each type of request is documented in
-this section.
+this section, with the corresponding type of response. In addition, every
+request may be responded to with an Unauthorized response.
 
 Hello
 '''''

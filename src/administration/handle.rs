@@ -9,7 +9,7 @@ use administration::message::Response;
 pub fn authenticate_and_handle(pubk: &PublicKey, req: &Request) -> Response {
     match req.token.verify(pubk) {
         Some(creds) => just_handle(&creds, &req.body),
-        None => Response::BadAuthentication,
+        None => Response::Unauthorized,
     }
 }
 
