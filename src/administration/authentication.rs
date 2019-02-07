@@ -17,10 +17,10 @@ pub struct Credentials {
 }
 
 impl Token {
-    pub fn verify(self, public_key: &PublicKey) -> Option<Credentials> {
-        let signature = self.signature;
-        let credentials = self.credentials;
+    pub fn verify(&self, public_key: &PublicKey) -> Option<&Credentials> {
+        let signature = &self.signature;
+        let credentials = &self.credentials;
         let message = serde_cbor::to_vec(&credentials).unwrap();
-        public_key.verify(&message, &signature).ok().map(|()| credentials)
+        public_key.verify(&message, signature).ok().map(|()| credentials)
     }
 }

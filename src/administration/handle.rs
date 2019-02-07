@@ -6,7 +6,7 @@ use administration::message::RequestBody;
 use administration::message::Response;
 
 /// Handle an incoming request.
-pub fn authenticate_and_handle(pubk: &PublicKey, req: Request) -> Response {
+pub fn authenticate_and_handle(pubk: &PublicKey, req: &Request) -> Response {
     match req.token.verify(pubk) {
         Some(creds) => just_handle(&creds, &req.body),
         None => Response::BadAuthentication,
