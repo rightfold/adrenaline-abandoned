@@ -3,6 +3,7 @@ pkgs.stdenv.mkDerivation {
     name = "adrenaline";
     buildInputs = [
         pkgs.cargo
+        pkgs.zeromq
     ];
     phases = ["installPhase"];
     installPhase = ''

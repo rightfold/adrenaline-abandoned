@@ -16,6 +16,9 @@ pub enum RequestBody {
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub enum Response {
-    Unauthorized,
     Hello,
+
+    MalformedRequest,
+    RequestTooLarge,
+    Unauthorized,
 }
