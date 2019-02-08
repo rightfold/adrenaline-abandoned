@@ -2,6 +2,7 @@ use std::io;
 
 use administration::message::Request;
 use administration::message::Response;
+use log::log;
 use zmq::RecvFlags;
 use zmq::SendFlags;
 use zmq::Socket;
@@ -21,12 +22,14 @@ pub fn exchange<F>(rep: &Socket, f: F) -> io::Result<()>
     // TODO: and reuse it.
     let mut req_bytes = [0; MAX_REQUEST_SIZE];
     let req_size = rep.recv(&mut req_bytes, RecvFlags::empty())?;
+    log("request", req_size);
 
     let req = decode_request(&req_bytes, req_size);
     let res = req.map(f).unwrap_or_else(|r| r);
 
     let res_bytes = serde_cbor::to_vec::<Response>(&res).unwrap();
     rep.send(&res_bytes, SendFlags::empty())?;
+    log("response", res_bytes.len());
 
     Ok(())
 }
